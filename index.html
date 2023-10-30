@@ -2439,9 +2439,11 @@
     var banheiroObserver = new IntersectionObserver(function (entries) {
       if (entries[0].isIntersecting == true) {
         console.log('Visualizou o banheiro');
+        console.log('Fernando');
       }
     })
     banheiroObserver.observe(document.querySelector('#about > div > div:nth-child(2) > div > ul > li:nth-child(1) > div.timeline-image > img'))
+    
   </script>
 
   <script>
