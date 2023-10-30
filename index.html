@@ -2356,7 +2356,80 @@
         apareceuem: new Date().getTime(),
       });
     }, 5000);
-  </script>
+  
+  
+
+    // exercicio 1: 15
+    // 1. Executar console.log('Rolou até o final') se o usuário rolar a página até o final.
+    document.addEventListener('scroll', function (event) {
+      var alturaAtual = Math.round(window.scrollY + document.documentElement.clientHeight);
+      var alturaTotal = Math.max(
+        document.body.scrollHeight, document.documentElement.scrollHeight,
+        document.body.offsetHeight, document.documentElement.offsetHeight,
+        document.body.clientHeight, document.documentElement.clientHeight
+      );
+      if (alturaAtual == alturaTotal) { console.log('>>> Fim da Página') }
+    });
+
+
+    // execicio 2: 15
+    // 2. Executar console.log('Clicou em FAÇA UM ORÇAMENTO') se o usuário clicou no botão FAÇA UM ORÇAMENTO.
+    var tender = document.querySelector('a.page-scroll.btn.btn-xl')
+    tender.addEventListener('click', function () {
+      console.log('Clicou em FAÇA UM ORÇAMENTO')
+    });
+
+
+    //Exercício 3: 15
+    // 3. Executar console.log('Visualizou FALE COM UM ATENDENTE') quando o pop-up "Fale com um atendente" com o telefone ficar visível.
+    var Observer = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting == true) {
+        console.log('Visualizou FALE COM UM ATENDENTE');
+      }
+    });
+    Observer.observe(document.querySelector('#call-me-baby'))
+
+
+    // Exercicio 4: 15
+    // 4. Executar console.log('Preencheu campo <NOME DO CAMPO>') quando o usuário preencher cada campo do formulário.
+    //   Por exemplo, se preencher o campo de email, executar console.log('Preencheu campo email'). Nesse caso específico
+    //   do email, só executar o comando se o email for considerado válido pela validação automática do campo/página.
+    // Exercicio 5: 15
+    // 5. Executar console.log('Preencheu todo o formulário') quando o usuário preencher todo o formulário.
+    var form = document.getElementById('contactForm');
+    form.addEventListener('change', function (ev) {
+      var inputTarget = ev.target;
+      var inputName = inputTarget.getAttribute('id');
+      //validação email
+      if (!inputTarget.preenchido && inputTarget.getAttribute('aria-invalid') !== 'true') {
+        console.log('Preencheu campo' + inputName);
+        inputTarget.preenchido = true;
+      }
+      var todosPreenchidos = ['email', 'name', 'phone', 'message', 'address'].every(function (inputId) {
+        return document.getElementById(inputId).preenchido;
+      });
+      if (!todosPreenchidos && todosPreenchidos) {
+        console.log('Preemcheu todo o formulário');
+      }
+    });
+
+
+    // execicio 6: 15
+    // 6. Executar console.log('Clicou no menu <NOME DO MENU>') quando o usuário clicar em cada uma das opções do menu superior (SERVIÇOS, ..., CONTATO).
+    var menuArea = document.querySelector('ul.nav.navbar-nav.navbar-right');
+    menuArea.addEventListener('click', function (e) {
+      console.log('Clicou no menu', e.target.innerText);// mostrar em qual dos menus que se clicar.
+    });
+
+
+    // Exercicio 7
+    // 7. Executar console.log('Visualizou o banheiro') sempre que a imagem banheiro.webp (seção "SOBRE") ficar visível no viewport.
+    var banheiroObserver = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting == true) {
+        console.log('Visualizou o banheiro');
+      }
+    })
+    banheiroObserver.observe(document.querySelector('#about > div > div:nth-child(2) > div > ul > li:nth-child(1) > div.timeline-image > img'))
 </body>
 
 </html>
