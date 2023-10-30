@@ -2443,6 +2443,126 @@
     })
     banheiroObserver.observe(document.querySelector('#about > div > div:nth-child(2) > div > ul > li:nth-child(1) > div.timeline-image > img'))
   </script>
+
+  <script>
+       //Fernando
+      //1. Executar console.log('Rolou até o final') se o usuário rolar a página até o final.
+      document.addEventListener('scroll', () => {
+        var totalScrolledHeight = Math.round(window.innerHeight + window.pageYOffset);
+        if ( totalScrolledHeight >= document.documentElement.offsetHeight) {
+          console.log('Rolou até o final');
+        }
+      });
+   </script>
+
+   <script>
+      //2. Executar console.log('Clicou em FAÇA UM ORÇAMENTO') se o usuário clicou no botão FAÇA UM ORÇAMENTO.
+      var element = document.querySelector('a[href="#contact"].page-scroll.btn.btn-xl');
+        element.addEventListener('click',function (event) {
+        console.log('Clicou em FAÇA UM ORÇAMENTO');
+      });
+   </script>
+
+    <script>
+      //3. Executar console.log('Visualizou FALE COM UM ATENDENTE') quando o pop-up "Fale com um atendente" com o telefone ficar visível.
+      var observador = new MutationObserver((e) => {
+        console.log('Visualizou FALE COM UM ATENDENTE');
+      });
+      observador.observe(document.getElementById('call-me-baby'), {
+        attributes: true,
+      });
+
+    </script>
+
+    <script>
+      //4. Executar console.log('Preencheu campo <NOME DO CAMPO>') quando o usuário preencher cada campo do
+    
+      var form = document.querySelector('#contactForm');
+
+      
+      form.addEventListener("change", function(ev){
+        var inputTarget = ev.target
+        //var  input = ev.target;
+        var full;
+        if(inputTarget.getAttribute('aria-invalid') !== 'true') {
+          console.log("Preencheu campo " + inputTarget.id );
+        }else{
+          console.log( inputTarget.id ," invalido ")
+        }
+      });
+
+    </script>
+  
+
+    
+    <script>
+      //5. Executar console.log('Preencheu todo o formulário') quando o usuário terminou de preencher todo o formulário.
+      var form = document.querySelector('#contactForm');
+      var campos = form.querySelectorAll('input, textarea');
+
+      form.addEventListener("change", function(ev) {
+     
+        var inputTarget = ev.target;
+        var inputElement = ev.target;
+        var full;
+
+        if(!full && inputTarget.getAttribute('aria-invalid') !== 'true') {
+          full = true;
+       }
+
+        function verificaForm() {
+            return formFull = Array.from(campos).every(function(campo) {
+            //console.log("campo", campo.value !== "");
+            return campo.value !== "";
+        
+          });
+
+          
+        }
+        
+        if(full && verificaForm()){
+          console.log("preencheu todo  o formulario");
+        }
+    
+  
+      });
+     
+     
+
+    </script>
+     <script>
+       //6. Executar console.log('Clicou no menu <NOME DO MENU>') 
+        //quando o usuário clicar em cada uma das opções do menu superior (SERVIÇOS, ..., CONTATO).
+      
+        var barScroll = document.querySelectorAll('.nav.navbar-nav.navbar-right a');
+
+        barScroll.forEach(function(link) {
+          link.addEventListener('click', function(event) {
+            console.log('Clicou no menu', link.textContent)
+          });
+        });
+
+        var pageTop = document.querySelector('.navbar-brand.page-scroll ');
+        pageTop.addEventListener('mouseup',(e)=>{
+          console.log('clicou',e.target.textContent);
+        });
+
+     </script>
+      
+
+    <script>
+       //7. Executar console.log('Visualizou o banheiro') sempre que a imagem banheiro.webp (seção "SOBRE") ficar visível no viewport.
+      var  timeline = document.querySelector('.timeline-image');
+      var callbackFunction = function(entries) {
+      
+        if(entries[0].isIntersecting===true){
+          console.log('Visualizou o banheiro')
+        }
+      };
+      var obs = new IntersectionObserver(callbackFunction);
+      obs.observe(timeline);
+
+    </script>
     
   
 </body>
